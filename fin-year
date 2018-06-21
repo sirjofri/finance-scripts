@@ -9,5 +9,5 @@
 END {
 	asorti(sum, sorted);
 	for (i in sorted)
-		printf "%5s %7.2f €         (Avg %7.2f €/Month)\n", sorted[i], sum[sorted[i]], sum[sorted[i]]/count[sorted[i]];
+		printf "%5s  %9.2f €      (Avg %7.2f €/Month)\n", sorted[i], sum[sorted[i]], sum[sorted[i]]/count[sorted[i]];
 }

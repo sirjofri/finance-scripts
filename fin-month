@@ -18,14 +18,14 @@ BEGIN {
 	months["11"] = "November";
 	months["12"] = "Dezember";
 }
-{
+!/^$/{
 	sum[substr($2, 1, 7)]+=$3;
 	count[substr($2, 1, 7)]++;
 }
 END {
 	asorti(sum, sorted);
 	for (i in sorted)
-		printf "%8s %4s: %7.2f €, %3d items (Avg: %.2f €)\n",
+		printf "%10s %4s: %9.2f €, %3d items    (Avg: %7.2f €)\n",
 			months[substr(sorted[i], 6, 7)],
 			substr(sorted[i], 1, 4),
 			sum[sorted[i]],
