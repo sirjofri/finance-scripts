@@ -1,0 +1,17 @@
+#!/usr/bin/gawk -f
+# vim:set syntax=awk:
+
+# Test1	10	05	2018	13.20	Extended Information about Purchase
+
+BEGIN {
+	printf "Enter the title: ";
+	getline title < "-";
+	printf "Enter the date (tt.mm.yyyy): ";
+	getline date < "-";
+	printf "Enter the amount ([-]xx.xx): ";
+	getline amount < "-";
+	printf "Enter additional information (optional): ";
+	getline additional < "-";
+
+	printf "%s\t%4d.%.2d.%.2d\t%.2f\t%s\n", title, substr(date, 7, 10), substr(date, 4, 5), substr(date, 1, 2), amount, additional >"/dev/stderr";
+}

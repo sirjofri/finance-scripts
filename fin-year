@@ -1,0 +1,13 @@
+#!/usr/bin/gawk -f
+# vim:set syntax=awk:
+# Juli 2018:    15 €,   1 items
+
+{
+	sum[$2]+=$3;
+	count[$2]++;
+}
+END {
+	asorti(sum, sorted);
+	for (i in sorted)
+		printf "%5s %7.2f €         (Avg %7.2f €/Month)\n", sorted[i], sum[sorted[i]], sum[sorted[i]]/count[sorted[i]];
+}
