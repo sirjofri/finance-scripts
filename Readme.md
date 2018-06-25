@@ -34,26 +34,25 @@ your experience!
 Installation Instructions
 -------------------------
 
-**1\.** Pick a directory and create a folder. `/opt` or `~/bin` are good
-choices:
+You need `make`, `gzip` (for man pages) and `gawk` (for running the scripts).
+
+Use the given Makefile:
 
 ```bash
-mkdir -p /opt/whatever
+sudo make install
 ```
 
-**2\.** Copy all the `fin-` files there:
+To only install the scripts (or manpages) use `sudo make install-bin` (or
+`sudo make install-man`).
+
+To uninstall use:
 
 ```bash
-cp fin-* /opt/whatever/
+sudo make uninstall
 ```
 
-**3\.** Add the path to your `$PATH`:
-
-```bash
-export PATH=$PATH:/opt/whatever
-```
-
-You should add this `$PATH` line to where your `$PATH` is set.
+This removes all files except this directory. You can safely remove this
+directory without damaging your system.
 
 License
 =======
