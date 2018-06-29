@@ -5,17 +5,17 @@
 
 BEGIN {
 	curdate = strftime("%d.%m.%Y", systime());
-	printf "Enter the title: ";
+	printf "Enter the title: " >"/dev/stderr";
 	getline title < "-";
-	printf "Enter the date (%s): ", curdate;
+	printf "Enter the date (%s): ", curdate >"/dev/stderr";
 	getline date < "-";
 	if (date == "") {
 		date = curdate;
 	}
-	printf "Enter the amount ([-]xx.xx): ";
+	printf "Enter the amount ([-]xx.xx): " >"/dev/stderr";
 	getline amount < "-";
-	printf "Enter additional information (optional): ";
+	printf "Enter additional information (optional): " >"/dev/stderr";
 	getline additional < "-";
 
-	printf "%s\t%4d.%.2d.%.2d\t%.2f\t%s\n", title, substr(date, 7, 10), substr(date, 4, 5), substr(date, 1, 2), amount, additional >"/dev/stderr";
+	printf "%s\t%4d.%.2d.%.2d\t%.2f\t%s\n", title, substr(date, 7, 10), substr(date, 4, 5), substr(date, 1, 2), amount, additional;
 }

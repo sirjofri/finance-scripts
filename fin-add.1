@@ -2,19 +2,20 @@
 .SH NAME
 fin-add, fin-month, fin-year \- analyze and format finance records.
 .SH SYNOPSIS
-.B fin-add 2>>\fIrecords.txt
+.B fin-add >>\fIrecords.txt
 .br
 .B fin-month <\fIrecords.txt
 .br
-fin-month <\fIrecords.txt \fB| fin-year
+fin-month <\fIrecords.txt\fB | fin-year
 .SH DESCRIPTION
 .B fin-add
 prompts the user for record data. It asks for a \fIdescription\fR and a
 \fIdate\fR. If the user hits enter at the date prompt, the current date will
 be taken. The program then asks the user for the \fIamount\fR and finally
 additional information. These information can be used to filter the records.
-Please note that the valid record is printed to \fIstderr\fR, so you must
-redirect the correct file descriptor (\fB2>>\fR).
+Please note that the valid record is printed to \fIstdout\fR. Remember that
+you need to use the correct FD redirector (\fI>\fR overwrites, \fI>>\fR
+appends).
 .PP
 .B fin-month
 receives valid records from \fIstdin\fR and outputs formatted statistics about

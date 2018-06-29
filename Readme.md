@@ -17,13 +17,13 @@ them.
 statistics.
 
 `fin-add` is an interactive script. It prompts the user for record data and
-prints a valid record string to `stderr`!
+prints a valid record string to `stdout`!
 
 An example procedure is presented here:
 
 ```bash
-fin-add 2>testrecords.txt              # interactive user input
-fin-add 2>>testrecords.txt             # interactive user input
+fin-add >testrecords.txt              # interactive user input
+fin-add >>testrecords.txt             # interactive user input
 fin-month <testrecords.txt             # prints monthly statistics
 fin-month <testrecords.txt | fin-year  # prints yearly statistics
 ```
