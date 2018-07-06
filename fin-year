@@ -2,9 +2,6 @@
 # vim:set syntax=awk:
 # Juli 2018:    15 €,   1 items (Avg number euro, IN: num euro, OUT: num euro)
 
-#BEGIN {
-	#FS=" ";
-#}
 {
 	sum[$2]+=$3;
 	count[$2]++;
