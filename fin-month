@@ -21,14 +21,20 @@ BEGIN {
 !/^$/{
 	sum[substr($2, 1, 7)]+=$3;
 	count[substr($2, 1, 7)]++;
+	if ($3 < 0)
+		neg[substr($2, 1, 7)]+=$3;
+	else
+		pos[substr($2, 1, 7)]+=$3;
 }
 END {
 	asorti(sum, sorted);
 	for (i in sorted)
-		printf "%10s %4s: %9.2f €, %3d items    (Avg: %7.2f €)\n",
+		printf "%10s %4s: %9.2f €, %3d items    (Avg: %7.2f €, In: %7.2f €, Out: %7.2f €)\n",
 			months[substr(sorted[i], 6, 7)],
 			substr(sorted[i], 1, 4),
 			sum[sorted[i]],
 			count[sorted[i]],
-			sum[sorted[i]]/count[sorted[i]];
+			sum[sorted[i]]/count[sorted[i]],
+			pos[sorted[i]],
+			neg[sorted[i]];
 }
