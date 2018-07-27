@@ -2,9 +2,10 @@ MANDIR=/usr/share/man
 BINDIR=/usr/local/bin
 
 all:
-	@echo "Nothing to make. Use \`sudo make install\` to install."
+	@echo -e "Nothing to make. Use \`\033[0;32msudo make install\033[0m\` to install."
 
 install: install-bin install-man
+	@echo -e "Installation complete. Maybe you want to run \`\033[0;32mhash -r\033[0m\` to update your PATH executables?"
 
 uninstall:
 	- rm $(BINDIR)/fin-add $(BINDIR)/fin-month $(BINDIR)/fin-year $(BINDIR)/fin-month-prepare-plot $(BINDIR)/fin-month-plot
