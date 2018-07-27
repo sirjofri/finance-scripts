@@ -1,0 +1,39 @@
+#!/usr/bin/gawk -f
+# vim:set syntax=awk:
+
+BEGIN {
+	FS="\t";
+	months["01"] = "Januar";
+	months["02"] = "Februar";
+	months["03"] = "März";
+	months["04"] = "April";
+	months["05"] = "Mai";
+	months["06"] = "Juni";
+	months["07"] = "Juli";
+	months["08"] = "August";
+	months["09"] = "September";
+	months["10"] = "Oktober";
+	months["11"] = "November";
+	months["12"] = "Dezember";
+}
+!/^$/{
+	sum[substr($2, 1, 7)]+=$3;
+	count[substr($2, 1, 7)]++;
+	if ($3 < 0)
+		neg[substr($2, 1, 7)]+=$3;
+	else
+		pos[substr($2, 1, 7)]+=$3;
+}
+END {
+	asorti(sum, sorted);
+
+	for (i in sorted)
+		printf("%d\t\"%s %4s\"\t%f\t%f\t%f\t%f\n",
+			i,
+			months[substr(sorted[i], 6, 7)],
+			substr(sorted[i], 1, 4),
+			sum[sorted[i]],
+			sum[sorted[i]]/count[sorted[i]],
+			pos[sorted[i]],
+			neg[sorted[i]]);
+}

@@ -6,7 +6,7 @@ This package provides scripts that help me see my finance input and output.
 Usage
 -----
 
-This package comes with 3 different `(g)awk` scripts. These scripts to _not_
+This package comes with 4 different `(g)awk` scripts. These scripts to _not_
 directly work with files, they just receive records form `stdin` and write to
 `stdout`/`stderr`.
 
@@ -19,13 +19,21 @@ statistics.
 `fin-add` is an interactive script. It prompts the user for record data and
 prints a valid record string to `stdout`!
 
+`fin-month-prepare-plot` does the same thing as `fin-month` but prints
+parseable data to `stdout`. This data can be processed by `gnuplot` or other
+tools.
+
+`fin-month-plot` is a shell script. It calls `fin-month-prepare-plot` and
+creates a plot file `month.png`. It only works with `gnuplot`.
+
 An example procedure is presented here:
 
 ```bash
-fin-add >testrecords.txt              # interactive user input
-fin-add >>testrecords.txt             # interactive user input
+fin-add >testrecords.txt               # interactive user input
+fin-add >>testrecords.txt              # interactive user input
 fin-month <testrecords.txt             # prints monthly statistics
 fin-month <testrecords.txt | fin-year  # prints yearly statistics
+fin-month-plot <testrecords.txt        # creates a month.png plot
 ```
 
 Feel free to use Unix tools like `grep`, `cat` and shell functions to improve
@@ -35,6 +43,7 @@ Installation Instructions
 -------------------------
 
 You need `make`, `gzip` (for man pages) and `gawk` (for running the scripts).
+For plotting `sh` and `gnuplot` is required.
 
 Use the given Makefile:
 

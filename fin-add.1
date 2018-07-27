@@ -1,12 +1,16 @@
 .TH fin-* 1 "June 2018" sirjofri "finance scripts"
 .SH NAME
-fin-add, fin-month, fin-year \- analyze and format finance records.
+fin-add, fin-month, fin-year, fin-month-plot, fin-month-prepare-plot \- analyze and format finance records.
 .SH SYNOPSIS
 .B fin-add >>\fIrecords.txt
 .br
 .B fin-month <\fIrecords.txt
 .br
 fin-month <\fIrecords.txt\fB | fin-year
+.br
+.B fin-month-prepare-plot <\fIrecords.txt
+.br
+.B fin-month-plot <\fIrecords.txt
 .SH DESCRIPTION
 .B fin-add
 prompts the user for record data. It asks for a \fIdescription\fR and a
@@ -14,7 +18,7 @@ prompts the user for record data. It asks for a \fIdescription\fR and a
 be taken. The program then asks the user for the \fIamount\fR and finally
 additional information. These information can be used to filter the records.
 Please note that the valid record is printed to \fIstdout\fR. Remember that
-you need to use the correct FD redirector (\fI>\fR overwrites, \fI>>\fR
+you need to use the correct FD redirector (\fB>\fR overwrites, \fB>>\fR
 appends).
 .PP
 .B fin-month
@@ -24,6 +28,20 @@ the months.
 .B fin-year
 receives valid statistics from \fBfin-month\fR via \fIstdin\fR and outputs
 formatted statistics about the years.
+.PP
+.B fin-month-prepare-plot
+prepares the input data (\fIstdin\fR) and outputs raw data. Compare this output
+to \fBfin-month\fR, it's the same order.
+.PP
+.B fin-month-plot
+creates the \fImonth.png\fR file containing the plot representing the monthly
+statistics. It only works with \fBgnuplot\fR(1) and \fBsh\fR(1).
+.SH AUTHOR
+This package is created by sirjofri and is hosted on GitHub
+(\fBhttps://github.com/sirjofri/finance-scripts/\fR). For more information read the
+\fBReadme.md\fR file.
 .SH SEE ALSO
 .BR grep (1),
-.BR gawk (1)
+.BR gawk (1),
+.BR sh (1),
+.BR gnuplot (1)
