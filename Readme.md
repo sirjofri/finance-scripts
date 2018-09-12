@@ -7,7 +7,7 @@ Usage
 -----
 
 This package comes with 4 different `(g)awk` scripts. These scripts to _not_
-directly work with files, they just receive records form `stdin` and write to
+directly work with files, they just receive records from `stdin` and write to
 `stdout`/`stderr`.
 
 `fin-month` parses the input records and outputs some monthly statistics about
@@ -36,6 +36,14 @@ fin-month <testrecords.txt | fin-year  # prints yearly statistics
 fin-month-plot <testrecords.txt        # creates a month.png plot
 ```
 
+The tools can use data records like this. The long space in between _must_ be
+a tab character. You can use `fin-add` to create valid records.
+
+```
+short name         2018.09.12      -10.00     more information, tags
+short name 2       2018.09.12      25.00      more information
+```
+
 Feel free to use Unix tools like `grep`, `cat` and shell functions to improve
 your experience!
 
@@ -62,6 +70,9 @@ sudo make uninstall
 
 This removes all files except this directory. You can safely remove this
 directory without damaging your system.
+
+**Update:** I also provide a proper `PKGBUILD` in this repository. You can use
+`makepkg -si` to install this package on arch systems.
 
 License
 =======
