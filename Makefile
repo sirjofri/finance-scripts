@@ -1,5 +1,8 @@
-MANDIR=/usr/share/man
-BINDIR=/usr/local/bin
+PREFIX=/usr/local
+MANDIR=$(PREFIX)/share/man
+BINDIR=$(PREFIX)/bin
+
+BIN=fin-add fin-month fin-year fin-month-prepare-plot fin-month-plot
 
 all:
 	@echo -e "Nothing to make. Use \`\033[0;32msudo make install\033[0m\` to install."
@@ -8,45 +11,34 @@ install: install-bin install-man
 	@echo -e "Installation complete. Maybe you want to run \`\033[0;32mhash -r\033[0m\` to update your PATH executables?"
 
 uninstall:
-	- rm $(BINDIR)/fin-add $(BINDIR)/fin-month $(BINDIR)/fin-year $(BINDIR)/fin-month-prepare-plot $(BINDIR)/fin-month-plot
-	- rm $(MANDIR)/man1/fin-add.1.gz $(MANDIR)/man1/fin-month.1.gz $(MANDIR)/man1/fin-year.1.gz $(MANDIR)/man1/fin-month-prepare-plot.1.gz $(MANDIR)/man1/fin-month-plot.1.gz
+	- rm $(addprefix $(BINDIR)/, $(BIN))
+	- rm $(addprefix $(MANDIR)/man1/, $(addsuffix .1.gz, $(BIN)))
 	- mandb
 	@echo -e "\033[0;32m → uninstalled finance scripts\033[0m"
 
-install-bin: $(BINDIR)/fin-add $(BINDIR)/fin-month $(BINDIR)/fin-year $(BINDIR)/fin-month-prepare-plot $(BINDIR)/fin-month-plot
+package: pkgdirs $(addprefix $(PACKAGE)$(BINDIR)/, $(BIN)) $(addprefix $(PACKAGE)$(MANDIR)/man1/, $(addsuffix .1.gz, $(BIN)))
+	@echo -e "\033[0;32m → package prepared\033[0m"
+
+pkgdirs:
+	@mkdir -p $(PACKAGE)$(BINDIR)
+	@mkdir -p $(PACKAGE)$(MANDIR)/man1
+
+$(PACKAGE)$(BINDIR)/%: %
+	@cp $< $@
+
+$(PACKAGE)$(MANDIR)/man1/%.1.gz: %.1
+	@gzip <$< >$@
+
+install-bin: $(addprefix $(BINDIR)/, $(BIN))
 	@echo -e "\033[0;32m → installed script files to $(BINDIR)\033[0m"
 	
-$(BINDIR)/fin-add: fin-add
-	cp $< $@
+$(BINDIR)/%: %
+	@cp $< $@
 
-$(BINDIR)/fin-month: fin-month
-	cp $< $@
-
-$(BINDIR)/fin-year: fin-year
-	cp $< $@
-
-$(BINDIR)/fin-month-prepare-plot: fin-month-prepare-plot
-	cp $< $@
-
-$(BINDIR)/fin-month-plot: fin-month-plot
-	cp $< $@
-
-install-man: $(MANDIR)/man1/fin-add.1.gz $(MANDIR)/man1/fin-month.1.gz $(MANDIR)/man1/fin-year.1.gz $(MANDIR)/man1/fin-month-prepare-plot.1.gz $(MANDIR)/man1/fin-month-plot.1.gz
+install-man: $(addprefix $(MANDIR)/man1/, $(addsuffix .1.gz, $(BIN)))
 	@echo -e "\033[0;32m → installed man pages to $(MANDIR)\033[0m"
 	mandb
 	@echo -e "\033[0;32m → mandb updated\033[0m"
 
-$(MANDIR)/man1/fin-add.1.gz: fin-add.1
-	gzip <$< >$@
-
-$(MANDIR)/man1/fin-month.1.gz: fin-month.1
-	gzip <$< >$@
-
-$(MANDIR)/man1/fin-year.1.gz: fin-year.1
-	gzip <$< >$@
-
-$(MANDIR)/man1/fin-month-prepare-plot.1.gz: fin-month-prepare-plot.1
-	gzip <$< >$@
-
-$(MANDIR)/man1/fin-month-plot.1.gz: fin-month-plot.1
-	gzip <$< >$@
+$(MANDIR)/man1/%.1.gz: %.1
+	@gzip <$< >$@
