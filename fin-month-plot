@@ -6,6 +6,7 @@ GNUPLOT=$(cat <<EOF
 set terminal pngcairo
 set output "month.png"
 set xtics rotate
+set grid
 
 plot \
 "-" using 1:3:xtic(2) title "Avg" with lines, \
